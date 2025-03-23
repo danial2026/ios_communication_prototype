@@ -10,6 +10,16 @@ This Flutter application demonstrates bi-directional communication between Flutt
 - Multilingual support (English and Japanese)
 - Clean architecture with BLoC pattern
 
+## Demo
+
+### Video Demonstration (YouTube Shorts)
+
+<a href="https://www.youtube.com/shorts/4Lap_HX_JbE" target="_blank">
+  <img src="https://img.youtube.com/vi/4Lap_HX_JbE/0.jpg" alt="[Watch Demo on YouTube](https://www.youtube.com/shorts/4Lap_HX_JbE)" width="270" height="480" />
+</a>
+
+👆 **Click the image above** to watch the short demo video showing the iOS-Flutter communication in action.
+
 ## Getting Started
 
 ### Prerequisites
@@ -29,7 +39,7 @@ This Flutter application demonstrates bi-directional communication between Flutt
 
 The project follows a clean architecture approach:
 
-- `lib/src/bloc` - Business logic components using the BLoC pattern
+- `lib/src/bloc` - Business logic components using the BLoC patternv
 - `lib/src/core` - Core utilities and constants
 - `lib/src/localization` - Internationalization files
 - `lib/src/navigator` - Navigation management
