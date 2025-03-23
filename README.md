@@ -1,14 +1,15 @@
 # iOS-Flutter Communication Prototype
 
-This Flutter application demonstrates bi-directional communication between Flutter and native iOS code.
+This Flutter application demonstrates bi-directional communication between Flutter and native iOS code, implementing a data communication layer that interfaces between iOS and Flutter.
 
 ## Features
 
-- Sends commands from Flutter to native iOS code
-- Receives real-time data (random integers) generated on the iOS side
-- Demonstrates the use of method channels for communication
+- Sends commands from Flutter to native iOS code using method channels
+- Receives real-time data (random integers) generated on the iOS side via event channels
+- Demonstrates clean architecture with BLoC pattern for state management
+- Error handling for robust communication
 - Multilingual support (English and Japanese)
-- Clean architecture with BLoC pattern
+- Modern UI with animations
 
 ## Demo
 
@@ -22,6 +23,55 @@ This Flutter application demonstrates bi-directional communication between Flutt
 
 Direct Link : https://www.youtube.com/shorts/4Lap_HX_JbE
 
+## Architecture Overview
+
+The project implements a clean architecture approach with the following components:
+
+1. **Presentation Layer (Flutter UI)**
+   - Uses BLoC pattern for state management
+   - Handles UI updates based on data received from iOS
+
+2. **Communication Layer**
+   - Method Channels: For communicating from Flutter to iOS
+   - Event Channels: For receiving streaming data from iOS to Flutter
+
+3. **Native iOS Implementation**
+   - Swift implementation in AppDelegate
+   - Random data generator simulating USB data reception
+   - Timer-based data emission to demonstrate real-time communication
+
+### Design Patterns
+
+1. **BLoC Pattern (Business Logic Component)**
+   - Separates business logic from UI
+   - Provides a structured way to handle state management
+   - Facilitates testing and code maintenance
+
+2. **Singleton Pattern**
+   - Used for the method and event channels
+   - Ensures a single point of access for platform communication
+
+3. **Observer Pattern**
+   - Implemented via event channels and stream subscriptions
+   - Allows for reactive updates when data is received from iOS
+
+4. **Repository Pattern**
+   - Abstracts the data source from the business logic
+   - Provides a clean API for the BLoC to interact with
+
+## Communication Flow
+
+1. **Flutter to iOS**:
+   - Flutter UI triggers an action (start/stop data generation)
+   - BLoC processes the event and invokes the method channel
+   - iOS native code receives the method call and performs the requested action
+
+2. **iOS to Flutter**:
+   - iOS generates random integers using a timer
+   - Data is sent through the event channel
+   - Flutter's event channel listener receives the data
+   - BLoC processes the received data and updates the UI
+
 ## Getting Started
 
 ### Prerequisites
@@ -29,29 +79,66 @@ Direct Link : https://www.youtube.com/shorts/4Lap_HX_JbE
 - Flutter 3.0.0 or higher
 - Xcode 13.0 or higher (for iOS builds)
 - iOS 12.0+ device or simulator
+- CocoaPods for iOS dependency management
 
 ### Installation
 
 1. Clone this repository
+```bash
+git clone <repository-url>
+```
+
 2. Navigate to the project directory
-3. Run `flutter pub get` to install dependencies
-4. Run `flutter run -d iphone` to start the app on your connected device or simulator
+```bash
+cd ios_communication_prototype
+```
+
+3. Install Flutter dependencies
+```bash
+flutter pub get
+```
+
+4. Install iOS dependencies
+```bash
+cd ios && pod install && cd ..
+```
+
+5. Run the application
+```bash
+flutter run -d iphone
+```
 
 ## Project Structure
 
-The project follows a clean architecture approach:
+```
+lib/
+├── main.dart                    # Application entry point
+├── src/
+│   ├── app_preferences/         # App preferences management
+│   ├── bloc/                    # Business logic components
+│   │   ├── ios_communication/   # iOS communication BLoC
+│   │   │   ├── ios_communication_bloc.dart
+│   │   │   └── ios_communication_response_model.dart
+│   ├── core/                    # Core utilities and constants
+│   ├── helpers/                 # Helper classes
+│   ├── localization/            # Internationalization
+│   ├── navigator/               # Navigation management
+│   └── view/                    # UI components
+│       ├── page/                # App pages
+│       └── widget/              # Reusable widgets
+```
 
-- `lib/src/bloc` - Business logic components using the BLoC patternv
-- `lib/src/core` - Core utilities and constants
-- `lib/src/localization` - Internationalization files
-- `lib/src/navigator` - Navigation management
-- `lib/src/view` - UI components and screens
+## Implementation Details
 
-## Communication Flow
+### Flutter Side
+- Uses method channels (`com.zanis.ios_communication/method`) to send commands to iOS
+- Listens to event channels (`com.zanis.ios_communication/event`) to receive data from iOS
+- BLoC pattern handles state management and UI updates
 
-1. Flutter initiates communication with iOS using method channels
-2. iOS generates random integers and sends them back to Flutter
-3. Flutter displays the received data in real-time
+### iOS Native Side
+- Implements method channel handlers in Swift via AppDelegate
+- Creates a timer to simulate data generation (as a substitute for actual USB data)
+- Sends data to Flutter using event channels
 
 ## Localization
 
@@ -60,6 +147,16 @@ The app supports both English and Japanese languages. The localization files are
 - `lib/src/localization/app_ja.arb` (Japanese)
 
 **Note:** After modifying any ARB files, run `flutter gen-l10n` to regenerate the localization files and make the changes available in the application.
+
+## Debugging and Troubleshooting
+
+When troubleshooting communication issues:
+
+1. **Connection Timeout**: Check that method channels are properly set up and registered on both Flutter and iOS sides.
+
+2. **Data Corruption**: Verify that data serialization/deserialization is consistent between Flutter and iOS.
+
+3. **Integration Failures**: Ensure method channel names match exactly on both sides.
 
 ## License
 
