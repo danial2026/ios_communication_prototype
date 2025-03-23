@@ -1,0 +1,17 @@
+{
+  "@@locale": "ja",
+  "appName": "Demo",
+  "appDescription": "iOS-Flutter Communication Demo",
+  "ok": "OK",
+  "cancel": "キャンセル",
+  "doYouWantToExit": "終了しますか？",
+  "iosCommunication": "iOS通信",
+  "randomIntegersDescription": "iOS側で生成されたランダム整数",
+  "stopRandomIntGenerator": "ランダム整数生成を停止",
+  "startRandomIntGenerator": "ランダム整数生成を開始",
+  "randomNumber": "ランダム数値",
+  "error": "エラー",
+  "waitingForData": "データを待機中...",
+  "waitingToStart": "開始を待機中...",
+  "pressButtonToStart": "下のボタンを押してランダム数値の生成を開始します"
+}
