@@ -15,7 +15,7 @@ This Flutter application demonstrates bi-directional communication between Flutt
 ### Video Demonstration (YouTube Shorts)
 
 <a href="https://www.youtube.com/shorts/4Lap_HX_JbE" target="_blank">
-  <img src="https://img.youtube.com/vi/4Lap_HX_JbE/0.jpg" alt="[Watch Demo on YouTube](https://www.youtube.com/shorts/4Lap_HX_JbE)" width="270" height="480" />
+  <img src="./demo-in-simulator.png" alt="[Watch Demo on YouTube](https://www.youtube.com/shorts/4Lap_HX_JbE)" width="270" height="480" />
 </a>
 
 👆 **Click the image above** to watch the short demo video showing the iOS-Flutter communication in action.
